@@ -27,7 +27,7 @@ sudo apt-get install -y libboost-system-dev libboost-filesystem-dev libboost-dat
 
 ```
 cd /home/pi/
-git clone --recursive https://github.com/flyinghead/EmulationStation.git
+git clone --recursive https://github.com/gloony/EmulationStation.git
 ```
 
 ### Compile EmulationStation
