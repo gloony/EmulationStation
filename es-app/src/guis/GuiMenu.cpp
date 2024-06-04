@@ -22,8 +22,8 @@ GuiMenu::GuiMenu(Window* window) : GuiComponent(window), mMenu(window, _("MAIN M
 {
 	bool isFullUI = UIModeController::getInstance()->isUIModeFull();
 
-	if (isFullUI)
-		addEntry(_("SCRAPER").c_str(), 0x777777FF, true, [this] { openScraperSettings(); });
+	# if (isFullUI)
+	#	addEntry(_("SCRAPER").c_str(), 0x777777FF, true, [this] { openScraperSettings(); });
 
 	addEntry(_("SOUND SETTINGS").c_str(), 0x777777FF, true, [this] { openSoundSettings(); });
 
@@ -494,16 +494,16 @@ void GuiMenu::openQuitMenu()
 			s->addRow(row);
 		}
 	}
-	row.elements.clear();
-	row.makeAcceptInputHandler([window] {
-		window->pushGui(new GuiMsgBox(window, _("REALLY RESTART?"), _("YES"),
-			[] {
-			if (quitES("/tmp/es-sysrestart") != 0)
-				LOG(LogWarning) << "Restart terminated with non-zero result!";
-		}, _("NO"), nullptr));
-	});
-	row.addElement(std::make_shared<TextComponent>(window, _("RESTART SYSTEM"), Font::get(FONT_SIZE_MEDIUM), 0x777777FF), true);
-	s->addRow(row);
+	# row.elements.clear();
+	# row.makeAcceptInputHandler([window] {
+	# 	window->pushGui(new GuiMsgBox(window, _("REALLY RESTART?"), _("YES"),
+	# 		[] {
+	# 		if (quitES("/tmp/es-sysrestart") != 0)
+	# 			LOG(LogWarning) << "Restart terminated with non-zero result!";
+	# 	}, _("NO"), nullptr));
+	# });
+	# row.addElement(std::make_shared<TextComponent>(window, _("RESTART SYSTEM"), Font::get(FONT_SIZE_MEDIUM), 0x777777FF), true);
+	# s->addRow(row);
 
 	row.elements.clear();
 	row.makeAcceptInputHandler([window] {
