@@ -4,6 +4,8 @@ This is a localized fork of [Retropie's EmulationStation fork](https://github.co
 
 Inspired by similar work on the Recalbox fork.
 
+Don't use this version, I just forked it to disable some menu on my system.
+
 ## Languages currently supported
 
 * Catalan
