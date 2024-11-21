@@ -43,7 +43,7 @@ GuiMenu::GuiMenu(Window* window) : GuiComponent(window), mMenu(window, _("MAIN M
 	addEntry(_("QUIT").c_str(), 0x777777FF, true, [this] {openQuitMenu(); });
 
 	addChild(&mMenu);
-	addVersionInfo();
+	// addVersionInfo();
 	setSize(mMenu.getSize());
 	setPosition((Renderer::getScreenWidth() - mSize.x()) / 2, Renderer::getScreenHeight() * 0.15f);
 }
@@ -465,6 +465,17 @@ void GuiMenu::openQuitMenu()
 	Window* window = mWindow;
 
 	ComponentListRow row;
+	row.makeAcceptInputHandler([window] {
+		window->pushGui(new GuiMsgBox(window, _("REALLY SHUTDOWN?"), _("YES"),
+			[] {
+			if (quitES("/tmp/es-shutdown") != 0)
+				LOG(LogWarning) << "Shutdown terminated with non-zero result!";
+		}, _("NO"), nullptr));
+	});
+	row.addElement(std::make_shared<TextComponent>(window, _("SHUTDOWN SYSTEM"), Font::get(FONT_SIZE_MEDIUM), 0x777777FF), true);
+	s->addRow(row);
+
+	row.elements.clear();
 	if (UIModeController::getInstance()->isUIModeFull())
 	{
 		row.makeAcceptInputHandler([window] {
@@ -476,23 +487,6 @@ void GuiMenu::openQuitMenu()
 		});
 		row.addElement(std::make_shared<TextComponent>(window, _("RESTART EMULATIONSTATION"), Font::get(FONT_SIZE_MEDIUM), 0x777777FF), true);
 		s->addRow(row);
-
-
-
-		if(Settings::getInstance()->getBool("ShowExit"))
-		{
-			row.elements.clear();
-			row.makeAcceptInputHandler([window] {
-				window->pushGui(new GuiMsgBox(window, _("REALLY QUIT?"), _("YES"),
-					[] {
-					SDL_Event ev;
-					ev.type = SDL_QUIT;
-					SDL_PushEvent(&ev);
-				}, _("NO"), nullptr));
-			});
-			row.addElement(std::make_shared<TextComponent>(window, _("QUIT EMULATIONSTATION"), Font::get(FONT_SIZE_MEDIUM), 0x777777FF), true);
-			s->addRow(row);
-		}
 	}
 	// row.elements.clear();
 	// row.makeAcceptInputHandler([window] {
@@ -504,17 +498,6 @@ void GuiMenu::openQuitMenu()
 	// });
 	// row.addElement(std::make_shared<TextComponent>(window, _("RESTART SYSTEM"), Font::get(FONT_SIZE_MEDIUM), 0x777777FF), true);
 	// s->addRow(row);
-
-	row.elements.clear();
-	row.makeAcceptInputHandler([window] {
-		window->pushGui(new GuiMsgBox(window, _("REALLY SHUTDOWN?"), _("YES"),
-			[] {
-			if (quitES("/tmp/es-shutdown") != 0)
-				LOG(LogWarning) << "Shutdown terminated with non-zero result!";
-		}, _("NO"), nullptr));
-	});
-	row.addElement(std::make_shared<TextComponent>(window, _("SHUTDOWN SYSTEM"), Font::get(FONT_SIZE_MEDIUM), 0x777777FF), true);
-	s->addRow(row);
 
 	mWindow->pushGui(s);
 }
