@@ -1,5 +1,7 @@
 cmake_minimum_required(VERSION 2.8)
 
+cmake_policy(SET CMP0072 NEW)
+
 option(GLES "Set to ON if targeting OpenGL ES" ${GLES})
 option(GL "Set to ON if targeting Desktop OpenGL" ${GL})
 
