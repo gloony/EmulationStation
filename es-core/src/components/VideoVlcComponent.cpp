@@ -338,7 +338,8 @@ void VideoVlcComponent::startVideo()
 					setupContext();
 
 					// Setup the media player
-					mMediaPlayer = libvlc_media_player_new_from_media(mMedia);
+					//mMediaPlayer = libvlc_media_player_new_from_media(mMedia);
+					libvlc_media_parse_with_options(mMedia, libvlc_media_parse_local, 5000);
 
 					if (!Settings::getInstance()->getBool("VideoAudio"))
 					{
