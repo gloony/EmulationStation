@@ -4,7 +4,7 @@ This is a localized fork of [Retropie's EmulationStation fork](https://github.co
 
 Inspired by similar work on the Recalbox fork.
 
-Don't use this version, I just forked it to disable some menu on my system.
+In this fork, I disabled some menu for my personnal use and make it compatible for 64 bit system.
 
 ## Languages currently supported
 
@@ -23,6 +23,9 @@ Don't use this version, I just forked it to disable some menu on my system.
 
 ```bash
 sudo apt-get install -y libboost-system-dev libboost-filesystem-dev libboost-date-time-dev libboost-locale-dev libfreeimage-dev libfreetype6-dev libeigen3-dev libcurl4-openssl-dev libasound2-dev cmake libsdl2-dev
+# For 64bit
+sudo apt-get install libboost-all-dev libfreeimage-dev -y
+
 ```
 
 ### Create a clone from GitHub
