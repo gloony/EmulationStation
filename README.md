@@ -5,6 +5,11 @@ This is a localized fork of [Retropie's EmulationStation fork](https://github.co
 Inspired by similar work on the Recalbox fork.
 
 In this fork, I disabled some menu for my personnal use and make it compatible for 64 bit system.
+Tested on :
+ * Raspberry Zero 2 (32bit)
+ * Raspberry 4 (32bit)
+ * Raspberry 4 (64bit)
+ * Raspberry 5 (64bit)
 
 ## Languages currently supported
 
